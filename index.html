@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link rel="stylesheet" href="./assets/plugins/bootstrap-4.6.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <script type="text/javascript" src="./assets/plugins/jquery/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="./assets/plugins/bootstrap-4.6.2-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header class="header text-center mt-3">
+        <h2>tổng hợp dịch vụ</h2>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row justify-content-xl-center justify-content-around">
+            <!-- CURRENT TASK HERE -->
+            <div class="average-case-container col-xl-8 col-11 mt-5 shadow-sm">
+                <div class="row d-flex justify-content-around mt-2 align-items-end">
+                    <div class="col-xl-2 text-nowrap">
+                        <h5>Trung bình số ca</h5>
+                    </div>
+                    <div class="show-by-container col-xl-2 text-nowrap">
+                        <label for="show-by">Hiển thị theo:</label>
+                        <select id="show-by">
+                            <option value="day">Ngày</option>
+                            <option value="month">Tháng</option>
+                            <option value="year">Năm</option>
+                        </select>
+                    </div>
+                    <div class="min-date-picker-container col-sm-6 col-xl-3">
+                        <div class="input-group date date-picker" id="min-date-picker">
+                            <label for="min-date-textfield">Từ ngày</label>
+                            <input type="text" id="min-date-textfield" class="form-control col-12 col-xl-12">
+                            <span class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fa fa-calendar date-picker-btn"></i>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="max-date-picker-container col-sm-6 col-xl-3">
+                        <div class="input-group date date-picker" id="max-date-picker">
+                            <label for="max-date-textfield">Đến ngày</label>
+                            <input type="text" id="max-date-textfield" class="form-control col-12 col-xl-12">
+                            <span class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fa fa-calendar date-picker-btn"></i>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container-1">
+                    <canvas id="myChart1"></canvas>
+                </div>
+            </div>
+
+            <!--  -->
+            <div class="today-statistics col-xl-3 mt-3 text-center text-nowrap">
+                <div class="">
+                    <h5 class="today-header">Hiện tại: 28/07/2022</h5>
+                </div>
+                <div class="row justify-content-around mb-4">
+                    <div class="amount col-5 offset-xl-1 pt-2 pb-4 shadow-sm" id="amount">
+                        <h3>Tổng số</h3>
+                        <h1></h1>
+                    </div>
+                    <div class="done col-5 offset-xl-1 pt-2 pb-4 shadow-sm" id="done">
+                        <h3>Đã duyệt</h3>
+                        <h1></h1>
+                    </div>
+                </div>
+                <div class="row justify-content-around">
+                    <div class="unread col-5 offset-xl-1 pt-2 pb-4 shadow-sm" id="unread">
+                        <h3>Chưa đọc</h3>
+                        <h1></h1>
+                    </div>
+                    <div class="reading col-5 offset-xl-1 pt-2 pb-4 shadow-sm" id="reading">
+                        <h3>Đang đọc</h3>
+                        <h1></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-4 justify-content-xl-center justify-content-around">
+            <div class="doctor-list-container col-xl-8 col-11 shadow-sm">
+                <div class="row justify-content-between pt-2 px-3">
+                    <div><h6>Số ca/Bác sỹ</h6></div>
+                    <div><h6 class="today-header">Ngày 28/07/2022</h6></div>
+                </div>
+                <div class="row justify-content-end">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="isscroll-checkbox" checked>
+                        <label class="custom-control-label" for="isscroll-checkbox">Cuộn</label>
+                    </div>
+                </div>
+                <div class="table-container" id="doctor-table-container">
+                    <table class="doctor-list-table table table-borderless m-0" id="doctor-list-table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col-8">Họ và tên</th>
+                                <th scope="col">CT</th>
+                                <th scope="col">DX</th>
+                                <th scope="col">Tổng</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-sm">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="test col-xl-3 mt-4 mt-xl-0">
+                <div class="row justify-content-around" style="height: 100%;">
+                    <div class="case-per-service-container col-11 offset-xl-1 shadow-sm">
+                        <div class="row justify-content-between pt-2 px-3">
+                            <div><h6>Số ca/Nhóm dịch vụ</h6></div>
+                            <div><h6 class="today-header"></h6></div>
+                        </div>
+                        <div class="chart-container-2 d-flex align-items-end">
+                            <canvas id="myChart2"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="side-bar" id="side-bar">
+            <form action="/index.html" method="get" class="form-show-doctor" id="form-show-doctor">
+                <label for="doctors">Số lượng bác sĩ hiển thị trong bảng</label><br/>
+                <input type="number" id="doctors" name="doctors">
+                <input type="submit" value="Hiển thị">
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="./assets/js/FakeData.js"></script>
+    <script type="text/javascript" src="./assets/js/TableSetting.js"></script>
+    <script type="text/javascript" src="./assets/js/scripts.js"></script>
+</body>
+</html>
