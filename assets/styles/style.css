@@ -104,26 +104,30 @@ label.custom-control-label::before, label.custom-control-label::after{
     background: var(--scrollbar-color); 
 }
 
-/* .side-bar {
-    position: sticky;
-} */
-
-.side-bar form {
+.side-bar > .icons-container {
     position: absolute;
-    left: -18em;
+    left: -3em;
+    top: 7rem;
+    background-color: var(--main-blue);
     transition: 0.3s;
-    padding: 1rem 2.5rem 1rem 1rem;
+    padding: 0.2rem 1rem 0.2rem 1rem;
     font-size: 20px;
-    text-decoration: none !important;
     color: var(--main-white);
     border-radius: 0 5px 5px 0;
 }
 
-.side-bar form:hover {
+.side-bar > .icons-container > i {
+    padding-left: 2rem;
+}
+
+.side-bar .icons-container:hover {
     left: 0;
 }
 
-.form-show-doctor {
-    top: 7rem;
-    background-color: var(--main-blue);
+.modal-content {
+    background-color: #353a40 !important;
+}
+
+.modal-content button, .modal-content input[type="submit"] {
+    color: var(--main-white);
 }

@@ -4,13 +4,17 @@ window.time = 0;
 
 function setTableScroll() {
     var resultFromURL = getNumberOfDoctorToShowInTable();
+    var rowNumbers = $("#doctor-list-table > tbody > tr").length;
     var rowsPerDisplay = resultFromURL['numberOfDoctor'];
     var isValid = resultFromURL['isValid'];
     if (!isValid) {
         alertAfterPageReady('Số lượng bác sĩ phải là một số nguyên lớn hơn hoặc bằng 5');
     }
+    if (rowNumbers < rowsPerDisplay) {
+        rowsPerDisplay = rowNumbers;
+        alertAfterPageReady('Vượt quá số lượng bác sĩ');
+    }
     setHeightForTable(rowsPerDisplay);
-    var rowNumbers = $("#doctor-list-table > tbody > tr").length;
     if ($('#isscroll-checkbox').is(':checked')) {
         $('.table-container').css('overflow-y', 'auto');
         isScrollable = true;
@@ -65,7 +69,7 @@ function getNumberOfDoctorToShowInTable() {
     }
     else {
         numberOfDoctor = parseInt(numberOfDoctor);
-        if (numberOfDoctor === NaN) {
+        if (isNaN(numberOfDoctor)) {
             numberOfDoctor = defaultNumberOfDoctor;
             isValid = false;
         }
